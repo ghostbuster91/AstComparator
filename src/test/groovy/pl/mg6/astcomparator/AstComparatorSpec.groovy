@@ -1,8 +1,8 @@
-package pl.mg6.utils
+package pl.mg6.astcomparator
 
 import spock.lang.Specification
 
-import static pl.mg6.utils.AstComparator.assertThat
+import static pl.mg6.astcomparator.AstComparator.assertThat
 
 class AstComparatorSpec extends Specification {
 

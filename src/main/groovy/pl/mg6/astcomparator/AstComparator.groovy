@@ -1,4 +1,4 @@
-package pl.mg6.utils
+package pl.mg6.astcomparator
 
 import org.codehaus.groovy.ast.*
 import org.codehaus.groovy.ast.expr.*
