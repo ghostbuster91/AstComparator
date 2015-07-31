@@ -1,2 +1,2 @@
-# SharedPrefs
-SharedPrefs annotation creates better API when working with SharedPreferences.
+# AstComparator
+Tester for groovy AST transformations.
