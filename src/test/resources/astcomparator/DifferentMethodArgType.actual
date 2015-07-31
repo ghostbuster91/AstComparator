@@ -1,0 +1,6 @@
+class ActualClassName {
+
+    void second(Integer a){
+    
+    }
+}
