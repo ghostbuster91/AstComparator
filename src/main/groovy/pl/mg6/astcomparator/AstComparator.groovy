@@ -6,6 +6,7 @@ import org.codehaus.groovy.ast.stmt.BlockStatement
 import org.codehaus.groovy.ast.stmt.ExpressionStatement
 import org.codehaus.groovy.ast.stmt.ReturnStatement
 import org.codehaus.groovy.classgen.BytecodeSequence
+import org.codehaus.groovy.transform.GroovyASTTransformationClass
 
 class AstComparator {
 
@@ -75,9 +76,7 @@ class AstComparator {
                 assertSyntaxTree(expected.fields, actual.fields)
                 assertSyntaxTree(expected.declaredConstructors, actual.declaredConstructors)
                 assertSyntaxTree(expected.allDeclaredMethods, actual.allDeclaredMethods)
-                assertSyntaxTree(expected.annotations, actual.annotations.findAll {
-                    !it.classNode.name.startsWith("pl.mg6.grooid.")
-                })
+                assertSyntaxTree(expected.annotations, actual.annotations.findAll(this.&isNotASTTransformationAnnotation))
             },
             FieldNode             : { FieldNode expected, FieldNode actual ->
                 if (expected.name != actual.name) {
@@ -188,4 +187,12 @@ class AstComparator {
                 }
             }
     ]
+    //TODO write test, hmm might be a challage :)
+    private static boolean isNotASTTransformationAnnotation(AnnotationNode node) {
+        return !node.classNode.annotations.any(this.&isGroovyASTTransformationClassAnnotation)
+    }
+
+    private static boolean isGroovyASTTransformationClassAnnotation(AnnotationNode node) {
+        return node.classNode.name == GroovyASTTransformationClass.class.name
+    }
 }
