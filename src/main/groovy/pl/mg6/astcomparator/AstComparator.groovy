@@ -76,7 +76,7 @@ class AstComparator {
                 assertSyntaxTree(expected.fields, actual.fields)
                 assertSyntaxTree(expected.declaredConstructors, actual.declaredConstructors)
                 assertSyntaxTree(expected.allDeclaredMethods, actual.allDeclaredMethods)
-                assertSyntaxTree(expected.annotations, actual.annotations.findAll(this.&isNotASTTransformationAnnotation))
+                assertSyntaxTree(expected.annotations, actual.annotations)
             },
             FieldNode             : { FieldNode expected, FieldNode actual ->
                 if (expected.name != actual.name) {
@@ -187,12 +187,4 @@ class AstComparator {
                 }
             }
     ]
-    //TODO write test, hmm might be a challage :)
-    private static boolean isNotASTTransformationAnnotation(AnnotationNode node) {
-        return !node.classNode.annotations.any(this.&isGroovyASTTransformationClassAnnotation)
-    }
-
-    private static boolean isGroovyASTTransformationClassAnnotation(AnnotationNode node) {
-        return node.classNode.name == GroovyASTTransformationClass.class.name
-    }
 }
