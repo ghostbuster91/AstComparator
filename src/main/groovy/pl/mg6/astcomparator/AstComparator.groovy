@@ -185,6 +185,10 @@ class AstComparator {
                         assertNode(eInstr, aInstr)
                     }
                 }
+            },
+            CastExpression        : { CastExpression expected, CastExpression actual ->
+                assertClassNode(expected.type, actual.type)
+                assertNode(expected.expression, actual.expression)
             }
     ]
 }
